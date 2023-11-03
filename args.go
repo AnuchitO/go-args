@@ -37,5 +37,5 @@ func main() {
 	fmt.Println("args:", os.Args)
 
 	// use the new methods
-	fmt.Println("arg 1:", args.Num(0))
+	fmt.Println("arg 0:", args.Num(0))
 }
