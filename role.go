@@ -40,4 +40,26 @@ func ParseRole(name string) (Role, error) {
 	return role, nil
 }
 
-// go mod init github.com/anuchito/godemo
+// UnmarshalText implement the unmarshal interface for JSON conversions.
+// This allows us to unmarshal a role from a JSON string.
+func (r *Role) UnmarshalText(name []byte) error {
+	role, err := ParseRole(string(name))
+	if err != nil {
+		return err
+	}
+
+	*r = role
+
+	return nil
+}
+
+// MarshalText implement the marshal interface for JSON conversions.
+// This allows us to marshal a role to a JSON string.
+func (r Role) MarshalText() ([]byte, error) {
+	return []byte(r.name), nil
+}
+
+// Equal returns true if the roles are equal
+func (r Role) Equal(other Role) bool {
+	return r.name == other.name
+}
